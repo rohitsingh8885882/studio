@@ -24,53 +24,53 @@ const products = [
     icon: <Bed className="h-10 w-10 text-primary" />,
     name: 'Modular Operation Theaters',
     description: 'We offer SS 304 Modular Operation Theaters, built to the highest standards for hospital use. Our modular, waterproof designs feature a polished finish, ensuring durability and hygiene. We provide PAN-India service for these state-of-the-art, NABH-compliant OTs.',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://5.imimg.com/data5/SELLER/Default/2023/3/CV/FU/SX/14946389/modular-operation-theater-500x500.jpg',
     aiHint: 'operating room',
   },
   {
     icon: <Stethoscope className="h-10 w-10 text-primary" />,
     name: 'Intensive Care Units (ICU)',
     description: 'We specialize in custom-designed ICU setups that adhere to NABH standards. Our ICUs are equipped with cutting-edge patient monitoring, advanced life support systems, and robust infection control measures for superior patient care.',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://5.imimg.com/data5/SELLER/Default/2022/9/VY/VE/YJ/14946389/icu-ventilator-on-rent-500x500.jpg',
     aiHint: 'hospital ICU',
   },
   {
     icon: <Syringe className="h-10 w-10 text-primary" />,
     name: 'Medical Gas Pipelines',
     description: 'Our end-to-end Medical Gas Pipeline System (MGPS) installations adhere to the highest safety standards, including HTM 2022. We ensure a reliable and safe delivery of medical gases like Oxygen, Nitrous Oxide, and more, throughout your healthcare facility.',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://5.imimg.com/data5/ANDROID/Default/2022/9/JT/JD/EV/14946389/product-jpeg-500x500.jpg',
     aiHint: 'medical equipment',
   },
   {
     icon: <Bed className="h-10 w-10 text-primary" />,
     name: 'Hospital Furniture',
     description: 'We supply a complete range of high-quality, durable, and ergonomic furniture for all hospital needs, including patient beds, examination tables, trolleys, and waiting area chairs, designed for comfort and functionality.',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://5.imimg.com/data5/SELLER/Default/2023/10/350992797/XG/QY/XE/14946389-500x500.png',
     aiHint: 'hospital furniture',
   },
   {
     icon: <HeartPulse className="h-10 w-10 text-primary" />,
     name: 'Oxygen Generation Plant',
     description: 'We install reliable and cost-effective on-site oxygen generation plants. Our solutions provide a continuous and autonomous supply of medical-grade oxygen, reducing dependency on external suppliers and ensuring critical care readiness.',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://5.imimg.com/data5/SELLER/Default/2024/1/376878395/IO/XF/VB/14946389-500x500.jpeg',
     aiHint: 'oxygen plant',
   },
    {
     icon: <Stethoscope className="h-10 w-10 text-primary" />,
     name: 'Air Conditioning System',
     description: 'We provide specialized HVAC systems designed for healthcare facilities. Our solutions ensure optimal air quality, precise temperature and humidity control, and compliance with standards for operating theatres and critical care areas.',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://5.imimg.com/data5/SELLER/Default/2022/9/QF/FH/YU/14946389/hvac-system-for-operation-theater-500x500.jpg',
     aiHint: 'air conditioning',
   },
 ];
 
 const galleryImages = [
-    { src: 'https://placehold.co/800x600.png', alt: 'Operating Theater', aiHint: 'operating theater' },
-    { src: 'https://placehold.co/800x600.png', alt: 'ICU Room', aiHint: 'ICU room' },
-    { src: 'https://placehold.co/800x600.png', alt: 'Hospital Corridor', aiHint: 'hospital corridor' },
-    { src: 'https://placehold.co/800x600.png', alt: 'Medical Equipment', aiHint: 'medical equipment' },
-    { src: 'https://placehold.co/800x600.png', alt: 'Hospital Exterior', aiHint: 'hospital exterior' },
-    { src: 'https://placehold.co/800x600.png', alt: 'Patient Room', aiHint: 'patient room' },
+    { src: 'https://5.imimg.com/data5/SELLER/Default/2023/3/CV/FU/SX/14946389/modular-operation-theater-500x500.jpg', alt: 'Operating Theater', aiHint: 'operating theater' },
+    { src: 'https://5.imimg.com/data5/SELLER/Default/2022/9/VY/VE/YJ/14946389/icu-ventilator-on-rent-500x500.jpg', alt: 'ICU Room', aiHint: 'ICU room' },
+    { src: 'https://www.genuinehospi.com/images/gallery/3.jpeg', alt: 'Hospital Corridor', aiHint: 'hospital corridor' },
+    { src: 'https://5.imimg.com/data5/ANDROID/Default/2022/9/JT/JD/EV/14946389/product-jpeg-500x500.jpg', alt: 'Medical Equipment', aiHint: 'medical equipment' },
+    { src: 'https://www.genuinehospi.com/images/gallery/1.jpeg', alt: 'Hospital Exterior', aiHint: 'hospital exterior' },
+    { src: 'https://5.imimg.com/data5/SELLER/Default/2023/10/350992797/XG/QY/XE/14946389-500x500.png', alt: 'Patient Room', aiHint: 'patient room' },
 ];
 
 const testimonials = [
@@ -78,14 +78,14 @@ const testimonials = [
     quote: "The professionalism and expertise of Genuine Hospi Enterprises were exceptional. They transformed our vision for a modern OT into reality, on time and within budget.",
     name: 'Dr. Anjali Sharma',
     title: 'Chief Surgeon, City General Hospital',
-    logo: 'https://placehold.co/100x100.png',
+    logo: 'https://www.genuinehospi.com/images/clients/1.png',
     aiHint: 'hospital logo',
   },
   {
     quote: "Their attention to detail in our new ICU wing was remarkable. The quality of work and adherence to NABH standards is commendable. Our facility is now truly world-class.",
     name: 'Mr. Rajeev Mehta',
     title: 'Director, Sunshine Multispeciality Clinic',
-    logo: 'https://placehold.co/100x100.png',
+    logo: 'https://www.genuinehospi.com/images/clients/2.png',
     aiHint: 'clinic logo',
   },
 ];
@@ -172,8 +172,8 @@ function ProductsSection() {
               <Image
                 src={product.image}
                 alt={product.name}
-                width={600}
-                height={400}
+                width={500}
+                height={500}
                 className="h-56 w-full object-cover"
                 data-ai-hint={product.aiHint}
               />
@@ -203,7 +203,7 @@ function AboutSection() {
           <div className="order-2 md:order-1">
             <h2 className="font-headline text-3xl font-bold tracking-tight text-foreground sm:text-4xl">About Genuine Hospi Enterprises</h2>
             <p className="mt-4 text-lg text-muted-foreground">
-              Established in November 2023, Genuine Hospi Enterprises provides comprehensive hospital setup solutions across India. Our expertise encompasses designing and building ICU and modular OT units that adhere to NABH compliance standards. This includes medical gas pipeline systems, oxygen and nitrous oxide manifolds, and complete plant installations.
+              Established in 2015, Genuine Hospi Enterprises provides comprehensive hospital setup solutions across India. Our expertise encompasses designing and building ICU and modular OT units that adhere to NABH compliance standards. This includes medical gas pipeline systems, oxygen and nitrous oxide manifolds, and complete plant installations.
             </p>
             <p className="mt-4 text-lg text-muted-foreground">
               Our mission is to empower healthcare providers with facilities that enhance patient care, improve safety, and optimize operational efficiency.
@@ -211,7 +211,7 @@ function AboutSection() {
           </div>
           <div className="order-1 md:order-2">
             <Image
-              src="https://placehold.co/800x600.png"
+              src="https://www.genuinehospi.com/images/gallery/6.jpeg"
               alt="Hospital interior"
               width={800}
               height={600}
@@ -352,6 +352,10 @@ function ContactSection() {
                 </div>
                 <div className="flex items-center gap-3">
                     <Phone className="h-5 w-5 flex-shrink-0 text-primary" />
+                    <a href="tel:6207507418" className="hover:text-primary">62075 07418 (Main)</a>
+                </div>
+                 <div className="flex items-center gap-3">
+                    <Phone className="h-5 w-5 flex-shrink-0 text-primary" />
                     <a href="tel:9478884840" className="hover:text-primary">94788 84840</a>
                 </div>
                 <div className="flex items-center gap-3">
@@ -458,6 +462,10 @@ function Footer() {
             </div>
             <div className="flex items-center gap-3">
               <Phone className="h-5 w-5 flex-shrink-0 text-primary" />
+              <a href="tel:6207507418" className="hover:text-primary">62075 07418 (Main)</a>
+            </div>
+             <div className="flex items-center gap-3">
+              <Phone className="h-5 w-5 flex-shrink-0 text-primary" />
               <a href="tel:9478884840" className="hover:text-primary">94788 84840</a>
             </div>
              <div className="flex items-center gap-3">
@@ -473,3 +481,5 @@ function Footer() {
     </footer>
   );
 }
+
+    
