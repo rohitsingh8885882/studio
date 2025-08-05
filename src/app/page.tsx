@@ -1,15 +1,29 @@
+
+'use client'
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Bed, HeartPulse, Mail, MapPin, Phone, Quote, Stethoscope, Syringe } from 'lucide-react';
+import { Bed, HeartPulse, Mail, MapPin, Phone, Quote, Stethoscope, Syringe, User, MessageSquare, Building } from 'lucide-react';
 import Image from 'next/image';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/hooks/use-toast';
+import { sendContactEmail } from '@/ai/flows/send-contact-email';
+import React from 'react';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+import { ContactFormInputSchema } from '@/ai/schemas/contact-form';
+
 
 const products = [
   {
     icon: <Bed className="h-10 w-10 text-primary" />,
     name: 'Modular Operation Theaters',
     description: 'State-of-the-art, NABH-compliant modular OTs designed for efficiency and safety, featuring advanced air filtration and integrated systems.',
-    price: 'Starting at ₹15,00,000',
     image: 'https://placehold.co/600x400.png',
     aiHint: 'operating room',
   },
@@ -17,7 +31,6 @@ const products = [
     icon: <Stethoscope className="h-10 w-10 text-primary" />,
     name: 'Intensive Care Units (ICU)',
     description: 'Custom-designed ICU setups with cutting-edge patient monitoring, life support systems, and infection control measures.',
-    price: 'Starting at ₹25,00,000',
     image: 'https://placehold.co/600x400.png',
     aiHint: 'hospital ICU',
   },
@@ -25,10 +38,39 @@ const products = [
     icon: <Syringe className="h-10 w-10 text-primary" />,
     name: 'Medical Gas Pipelines',
     description: 'End-to-end MGPS installation adhering to the highest safety standards, ensuring reliable delivery of medical gases.',
-    price: 'Request a Quote',
     image: 'https://placehold.co/600x400.png',
     aiHint: 'medical equipment',
   },
+  {
+    icon: <Bed className="h-10 w-10 text-primary" />,
+    name: 'Hospital Furniture',
+    description: 'High-quality, durable, and ergonomic furniture for all hospital needs, including beds, tables, and chairs.',
+    image: 'https://placehold.co/600x400.png',
+    aiHint: 'hospital furniture',
+  },
+  {
+    icon: <HeartPulse className="h-10 w-10 text-primary" />,
+    name: 'Oxygen Generation Plant',
+    description: 'Reliable and cost-effective on-site oxygen generation plants for a continuous supply of medical-grade oxygen.',
+    image: 'https://placehold.co/600x400.png',
+    aiHint: 'oxygen plant',
+  },
+   {
+    icon: <Stethoscope className="h-10 w-10 text-primary" />,
+    name: 'Air Conditioning System',
+    description: 'Specialized HVAC systems designed for healthcare facilities to ensure optimal air quality and temperature control.',
+    image: 'https://placehold.co/600x400.png',
+    aiHint: 'air conditioning',
+  },
+];
+
+const galleryImages = [
+    { src: 'https://placehold.co/800x600.png', alt: 'Operating Theater', aiHint: 'operating theater' },
+    { src: 'https://placehold.co/800x600.png', alt: 'ICU Room', aiHint: 'ICU room' },
+    { src: 'https://placehold.co/800x600.png', alt: 'Hospital Corridor', aiHint: 'hospital corridor' },
+    { src: 'https://placehold.co/800x600.png', alt: 'Medical Equipment', aiHint: 'medical equipment' },
+    { src: 'https://placehold.co/800x600.png', alt: 'Hospital Exterior', aiHint: 'hospital exterior' },
+    { src: 'https://placehold.co/800x600.png', alt: 'Patient Room', aiHint: 'patient room' },
 ];
 
 const testimonials = [
@@ -57,8 +99,9 @@ export default function Home() {
         <HeroSection />
         <ProductsSection />
         <AboutSection />
+        <GallerySection />
         <TestimonialsSection />
-        <CtaSection />
+        <ContactSection />
       </main>
       <Footer />
     </div>
@@ -78,6 +121,7 @@ function Header() {
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
           <a href="#products" className="transition-colors hover:text-primary">Products</a>
           <a href="#about" className="transition-colors hover:text-primary">About Us</a>
+          <a href="#gallery" className="transition-colors hover:text-primary">Gallery</a>
           <a href="#testimonials" className="transition-colors hover:text-primary">Testimonials</a>
         </nav>
         <Button asChild style={{ backgroundColor: 'hsl(var(--accent))', color: 'hsl(var(--accent-foreground))' }} className="hover:bg-accent/90">
@@ -141,7 +185,7 @@ function ProductsSection() {
                 <p className="text-muted-foreground">{product.description}</p>
               </CardContent>
               <CardFooter className="bg-muted/50 p-4">
-                <p className="font-semibold text-foreground">{product.price}</p>
+                 <p className="font-semibold text-primary">Contact us for details</p>
               </CardFooter>
             </Card>
           ))}
@@ -181,9 +225,41 @@ function AboutSection() {
   )
 }
 
+function GallerySection() {
+  return (
+    <section id="gallery" className="w-full bg-card py-16 md:py-24">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <h2 className="font-headline text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Our Work</h2>
+          <p className="mt-4 text-lg text-muted-foreground">
+            A glimpse into the state-of-the-art facilities we've built.
+          </p>
+        </div>
+        <Carousel className="w-full">
+          <CarouselContent>
+            {galleryImages.map((image, index) => (
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                <div className="p-1">
+                  <Card className="overflow-hidden">
+                    <CardContent className="flex aspect-video items-center justify-center p-0">
+                       <Image src={image.src} alt={image.alt} width={800} height={600} className="w-full h-full object-cover" data-ai-hint={image.aiHint} />
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </div>
+    </section>
+  );
+}
+
 function TestimonialsSection() {
   return (
-    <section id="testimonials" className="w-full bg-card py-16 md:py-24">
+    <section id="testimonials" className="w-full bg-background py-16 md:py-24">
       <div className="container mx-auto max-w-7xl px-4 md:px-6">
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <h2 className="font-headline text-3xl font-bold tracking-tight text-foreground sm:text-4xl">What Our Clients Say</h2>
@@ -218,23 +294,139 @@ function TestimonialsSection() {
   );
 }
 
-function CtaSection() {
+
+function ContactSection() {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  const form = useForm<z.infer<typeof ContactFormInputSchema>>({
+    resolver: zodResolver(ContactFormInputSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      phone: '',
+      message: '',
+    },
+  });
+
+  async function onSubmit(values: z.infer<typeof ContactFormInputSchema>) {
+    setIsSubmitting(true);
+    try {
+      const response = await sendContactEmail(values);
+      if (response.success) {
+        toast({
+          title: 'Message Sent!',
+          description: "Thank you for reaching out. We'll get back to you shortly.",
+        });
+        form.reset();
+      } else {
+        throw new Error(response.error || 'An unknown error occurred');
+      }
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Uh oh! Something went wrong.',
+        description: 'There was a problem sending your message. Please try again later.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+  
   return (
-    <section id="contact" className="w-full py-16 md:py-24 bg-primary text-primary-foreground">
-      <div className="container mx-auto max-w-4xl px-4 text-center md:px-6">
-        <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">Ready to Elevate Your Healthcare Facility?</h2>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-primary-foreground/80">
-          Let's discuss how we can help you achieve your goals. Contact us for a free, no-obligation consultation with our experts.
-        </p>
-        <div className="mt-8">
-           <Button asChild size="lg" variant="secondary" className="bg-white text-primary hover:bg-gray-100">
-             <a href="tel:06207507418">Request a Consultation</a>
-           </Button>
+    <section id="contact" className="w-full py-16 md:py-24 bg-card">
+      <div className="container mx-auto max-w-7xl px-4 md:px-6">
+        <div className="grid gap-12 md:grid-cols-2 md:items-start">
+          <div>
+            <h2 className="font-headline text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Get in Touch</h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Have a question or a project in mind? Fill out the form or use the contact details below. We're here to help.
+            </p>
+             <div className="mt-8 space-y-4 text-muted-foreground">
+                <div className="flex items-start gap-3">
+                    <MapPin className="h-5 w-5 flex-shrink-0 text-primary mt-1" />
+                    <div>
+                        <h3 className="font-semibold text-foreground">Head Office</h3>
+                        <span>204, St 02, Sanjay Gandhi Nagar, Industrial Area, Jalandhar, 144004, Punjab</span>
+                    </div>
+                </div>
+                <div className="flex items-center gap-3">
+                    <Phone className="h-5 w-5 flex-shrink-0 text-primary" />
+                    <a href="tel:9478884840" className="hover:text-primary">94788 84840</a>
+                </div>
+                <div className="flex items-center gap-3">
+                    <Mail className="h-5 w-5 flex-shrink-0 text-primary" />
+                    <a href="mailto:rohitsingh8885882@gmail.com" className="hover:text-primary">rohitsingh8885882@gmail.com</a>
+                </div>
+             </div>
+          </div>
+          <div>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Full Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="John Doe" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                 <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Email Address</FormLabel>
+                      <FormControl>
+                        <Input placeholder="you@example.com" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                 <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Phone Number (Optional)</FormLabel>
+                      <FormControl>
+                        <Input placeholder="+91 12345 67890" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Message</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="Tell us how we can help..." className="min-h-[120px]" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" size="lg" disabled={isSubmitting} style={{ backgroundColor: 'hsl(var(--accent))', color: 'hsl(var(--accent-foreground))' }} className="w-full hover:bg-accent/90">
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                </Button>
+              </form>
+            </Form>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 function Footer() {
   return (
@@ -250,17 +442,27 @@ function Footer() {
         <div className="md:col-span-2">
           <h3 className="font-headline text-xl font-semibold text-foreground">Contact Information</h3>
           <div className="mt-4 space-y-3 text-muted-foreground">
-            <div className="flex items-center gap-3">
-              <MapPin className="h-5 w-5 flex-shrink-0 text-primary" />
-              <span>Bazaar, Pachrukhi, Siwan, Bihar 841241</span>
+            <div className="flex items-start gap-3">
+              <MapPin className="h-5 w-5 flex-shrink-0 text-primary mt-1" />
+              <div>
+                <span className="font-semibold text-foreground">Head Office</span><br/>
+                <span>204, st 02, sanjay gandhi nagar, Industrial area jalandhar,144004, Punjab</span>
+              </div>
+            </div>
+             <div className="flex items-start gap-3">
+              <MapPin className="h-5 w-5 flex-shrink-0 text-primary mt-1" />
+              <div>
+                <span className="font-semibold text-foreground">Branch Office</span><br/>
+                <span>Bazaar, Pachrukhi, Siwan, Bihar 841241</span>
+              </div>
             </div>
             <div className="flex items-center gap-3">
               <Phone className="h-5 w-5 flex-shrink-0 text-primary" />
-              <a href="tel:06207507418" className="hover:text-primary">062075 07418</a>
+              <a href="tel:9478884840" className="hover:text-primary">94788 84840</a>
             </div>
              <div className="flex items-center gap-3">
               <Mail className="h-5 w-5 flex-shrink-0 text-primary" />
-              <a href="mailto:contact@genuinehospi.com" className="hover:text-primary">contact@genuinehospi.com</a>
+              <a href="mailto:rohitsingh8885882@gmail.com" className="hover:text-primary">rohitsingh8885882@gmail.com</a>
             </div>
           </div>
         </div>
