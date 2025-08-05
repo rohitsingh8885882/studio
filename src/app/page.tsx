@@ -24,7 +24,7 @@ const products = [
     icon: <Bed className="h-10 w-10 text-primary" />,
     name: 'Modular Operation Theaters',
     description: 'We offer SS 304 Modular Operation Theaters, built to the highest standards for hospital use. Our modular, waterproof designs feature a polished finish, ensuring durability and hygiene. We provide PAN-India service for these state-of-the-art, NABH-compliant OTs.',
-    image: 'https://www.genuinehospi.com/images/gallery/4.jpeg',
+    image: 'https://www.genuinehospi.com/images/gallery/2.jpeg',
     aiHint: 'operating room',
   },
   {
@@ -68,9 +68,11 @@ const galleryImages = [
     { src: 'https://www.genuinehospi.com/images/gallery/4.jpeg', alt: 'Operating Theater', aiHint: 'operating theater' },
     { src: 'https://5.imimg.com/data5/SELLER/Default/2022/9/VY/VE/YJ/14946389/icu-ventilator-on-rent-500x500.jpg', alt: 'ICU Room', aiHint: 'ICU room' },
     { src: 'https://www.genuinehospi.com/images/gallery/3.jpeg', alt: 'Hospital Corridor', aiHint: 'hospital corridor' },
+    { src: 'https://www.genuinehospi.com/images/gallery/new-corridor.jpeg', alt: 'Hospital Interior', aiHint: 'hospital interior' },
     { src: 'https://5.imimg.com/data5/ANDROID/Default/2022/9/JT/JD/EV/14946389/product-jpeg-500x500.jpg', alt: 'Medical Equipment', aiHint: 'medical equipment' },
     { src: 'https://www.genuinehospi.com/images/gallery/1.jpeg', alt: 'Hospital Exterior', aiHint: 'hospital exterior' },
     { src: 'https://5.imimg.com/data5/SELLER/Default/2023/10/350992797/XG/QY/XE/14946389-500x500.png', alt: 'Patient Room', aiHint: 'patient room' },
+    { src: 'https://www.genuinehospi.com/images/gallery/2.jpeg', alt: 'Modular OT', aiHint: 'modular ot' },
 ];
 
 const testimonials = [
@@ -211,7 +213,7 @@ function AboutSection() {
           </div>
           <div className="order-1 md:order-2">
             <Image
-              src="https://www.genuinehospi.com/images/gallery/6.jpeg"
+              src="https://www.genuinehospi.com/images/gallery/new-corridor.jpeg"
               alt="Hospital interior"
               width={800}
               height={600}
@@ -481,5 +483,3 @@ function Footer() {
     </footer>
   );
 }
-
-    
