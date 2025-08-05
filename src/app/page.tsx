@@ -24,7 +24,7 @@ const products = [
     icon: <Bed className="h-10 w-10 text-primary" />,
     name: 'Modular Operation Theaters',
     description: 'We offer SS 304 Modular Operation Theaters, built to the highest standards for hospital use. Our modular, waterproof designs feature a polished finish, ensuring durability and hygiene. We provide PAN-India service for these state-of-the-art, NABH-compliant OTs.',
-    image: 'https://5.imimg.com/data5/SELLER/Default/2023/3/CV/FU/SX/14946389/modular-operation-theater-500x500.jpg',
+    image: 'https://www.genuinehospi.com/images/gallery/4.jpeg',
     aiHint: 'operating room',
   },
   {
@@ -65,7 +65,7 @@ const products = [
 ];
 
 const galleryImages = [
-    { src: 'https://5.imimg.com/data5/SELLER/Default/2023/3/CV/FU/SX/14946389/modular-operation-theater-500x500.jpg', alt: 'Operating Theater', aiHint: 'operating theater' },
+    { src: 'https://www.genuinehospi.com/images/gallery/4.jpeg', alt: 'Operating Theater', aiHint: 'operating theater' },
     { src: 'https://5.imimg.com/data5/SELLER/Default/2022/9/VY/VE/YJ/14946389/icu-ventilator-on-rent-500x500.jpg', alt: 'ICU Room', aiHint: 'ICU room' },
     { src: 'https://www.genuinehospi.com/images/gallery/3.jpeg', alt: 'Hospital Corridor', aiHint: 'hospital corridor' },
     { src: 'https://5.imimg.com/data5/ANDROID/Default/2022/9/JT/JD/EV/14946389/product-jpeg-500x500.jpg', alt: 'Medical Equipment', aiHint: 'medical equipment' },
