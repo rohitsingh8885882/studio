@@ -19,15 +19,17 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: '5.imimg.com',
+        port: '',
+        pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'www.genuinehospi.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
 };
 
 export default nextConfig;
-
-    
