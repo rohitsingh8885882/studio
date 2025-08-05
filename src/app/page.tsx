@@ -14,65 +14,89 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { sendContactEmail } from '@/ai/flows/send-contact-email';
-import React from 'react';
+import * as React from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import { ContactFormInputSchema } from '@/ai/schemas/contact-form';
 
 
-const products = [
+type Product = {
+  icon: React.ReactNode;
+  name: string;
+  description: string;
+  images: string[];
+  aiHint: string;
+};
+
+const products: Product[] = [
   {
     icon: <Bed className="h-10 w-10 text-primary" />,
     name: 'Modular Operation Theaters',
     description: 'We offer SS 304 Modular Operation Theaters, built to the highest standards for hospital use. Our modular, waterproof designs feature a polished finish, ensuring durability and hygiene. We provide PAN-India service for these state-of-the-art, NABH-compliant OTs.',
-    image: 'https://www.genuinehospi.com/images/gallery/2.jpeg',
+    images: [
+      '/images/modular-ot.jpg',
+      '/images/modular-ot1 (1).jpeg',
+      '/images/modular-ot1 (6).jpeg'
+    ],
     aiHint: 'operating room',
   },
   {
     icon: <Stethoscope className="h-10 w-10 text-primary" />,
     name: 'Intensive Care Units (ICU)',
     description: 'We specialize in custom-designed ICU setups that adhere to NABH standards. Our ICUs are equipped with cutting-edge patient monitoring, advanced life support systems, and robust infection control measures for superior patient care.',
-    image: 'https://5.imimg.com/data5/SELLER/Default/2022/9/VY/VE/YJ/14946389/icu-ventilator-on-rent-500x500.jpg',
+    images: [
+      '/images/icu-setup (1).jpeg',
+      '/images/icu-setup (2).jpeg',
+      '/images/icu-setup (3).jpeg'
+    ],
     aiHint: 'hospital ICU',
   },
   {
     icon: <Syringe className="h-10 w-10 text-primary" />,
     name: 'Medical Gas Pipelines',
     description: 'Our end-to-end Medical Gas Pipeline System (MGPS) installations adhere to the highest safety standards, including HTM 2022. We ensure a reliable and safe delivery of medical gases like Oxygen, Nitrous Oxide, and more, throughout your healthcare facility.',
-    image: 'https://5.imimg.com/data5/ANDROID/Default/2022/9/JT/JD/EV/14946389/product-jpeg-500x500.jpg',
+    images: [
+      '/images/gas-pipeline.jpeg',
+      '/images/gas-pipeline (1).jpeg',
+      '/images/gas-pipeline (2).jpeg'
+    ],
     aiHint: 'medical equipment',
   },
   {
     icon: <Bed className="h-10 w-10 text-primary" />,
     name: 'Hospital Furniture',
     description: 'We supply a complete range of high-quality, durable, and ergonomic furniture for all hospital needs, including patient beds, examination tables, trolleys, and waiting area chairs, designed for comfort and functionality.',
-    image: 'https://5.imimg.com/data5/SELLER/Default/2023/10/350992797/XG/QY/XE/14946389-500x500.png',
+    images: [
+      '/images/hospital-furniture (1).jpeg',
+      '/images/hospital-furniture (2).jpeg',
+      '/images/hospital-furniture (3).jpeg'
+    ],
     aiHint: 'hospital furniture',
   },
   {
     icon: <HeartPulse className="h-10 w-10 text-primary" />,
     name: 'Oxygen Generation Plant',
     description: 'We install reliable and cost-effective on-site oxygen generation plants. Our solutions provide a continuous and autonomous supply of medical-grade oxygen, reducing dependency on external suppliers and ensuring critical care readiness.',
-    image: 'https://5.imimg.com/data5/SELLER/Default/2024/1/376878395/IO/XF/VB/14946389-500x500.jpeg',
+    images: ['/images/gas-pipeline.jpeg'],
     aiHint: 'oxygen plant',
   },
    {
     icon: <Stethoscope className="h-10 w-10 text-primary" />,
     name: 'Air Conditioning System',
     description: 'We provide specialized HVAC systems designed for healthcare facilities. Our solutions ensure optimal air quality, precise temperature and humidity control, and compliance with standards for operating theatres and critical care areas.',
-    image: 'https://5.imimg.com/data5/SELLER/Default/2022/9/QF/FH/YU/14946389/hvac-system-for-operation-theater-500x500.jpg',
+    images: ['/images/modular-ot.jpg'],
     aiHint: 'air conditioning',
   },
 ];
 
 const galleryImages = [
-    { src: 'https://www.genuinehospi.com/images/gallery/4.jpeg', alt: 'Operating Theater', aiHint: 'operating theater' },
-    { src: 'https://5.imimg.com/data5/SELLER/Default/2022/9/VY/VE/YJ/14946389/icu-ventilator-on-rent-500x500.jpg', alt: 'ICU Room', aiHint: 'ICU room' },
-    { src: 'https://www.genuinehospi.com/images/gallery/3.jpeg', alt: 'Hospital Corridor', aiHint: 'hospital corridor' },
-    { src: 'https://www.genuinehospi.com/images/gallery/new-corridor.jpeg', alt: 'Hospital Interior', aiHint: 'hospital interior' },
-    { src: 'https://5.imimg.com/data5/ANDROID/Default/2022/9/JT/JD/EV/14946389/product-jpeg-500x500.jpg', alt: 'Medical Equipment', aiHint: 'medical equipment' },
-    { src: 'https://www.genuinehospi.com/images/gallery/1.jpeg', alt: 'Hospital Exterior', aiHint: 'hospital exterior' },
-    { src: 'https://5.imimg.com/data5/SELLER/Default/2023/10/350992797/XG/QY/XE/14946389-500x500.png', alt: 'Patient Room', aiHint: 'patient room' },
-    { src: 'https://www.genuinehospi.com/images/gallery/2.jpeg', alt: 'Modular OT', aiHint: 'modular ot' },
+    { src: '/images/modular-ot.jpg', alt: 'Operating Theater', aiHint: 'operating theater' },
+    { src: '/images/icu-setup (1).jpeg', alt: 'ICU Room', aiHint: 'ICU room' },
+    { src: '/images/modular-ot1 (1).jpeg', alt: 'Hospital Corridor', aiHint: 'hospital corridor' },
+    { src: '/images/icu-setup (2).jpeg', alt: 'Hospital Interior', aiHint: 'hospital interior' },
+    { src: '/images/gas-pipeline (1).jpeg', alt: 'Medical Equipment', aiHint: 'medical equipment' },
+    { src: '/images/hospital-furniture (1).jpeg', alt: 'Hospital Exterior', aiHint: 'hospital exterior' },
+    { src: '/images/hospital-furniture (2).jpeg', alt: 'Patient Room', aiHint: 'patient room' },
+    { src: '/images/modular-ot1 (6).jpeg', alt: 'Modular OT', aiHint: 'modular ot' },
 ];
 
 const testimonials = [
@@ -171,14 +195,29 @@ function ProductsSection() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
             <Card key={product.name} className="flex flex-col overflow-hidden rounded-lg shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-xl">
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={500}
-                height={500}
-                className="h-56 w-full object-cover"
-                data-ai-hint={product.aiHint}
-              />
+              <div className="relative h-56">
+                <Carousel className="w-full">
+                  <CarouselContent>
+                    {product.images.map((image, index) => (
+                      <CarouselItem key={index}>
+                        <div className="relative h-56">
+                          <Image
+                            src={image}
+                            alt={`${product.name} - View ${index + 1}`}
+                            fill
+                            className="object-cover"
+                            data-ai-hint={product.aiHint}
+                            priority={index === 0}
+                            loading={index === 0 ? 'eager' : 'lazy'}
+                          />
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="left-2" />
+                  <CarouselNext className="right-2" />
+                </Carousel>
+              </div>
               <CardHeader className="flex-row items-center gap-4">
                 {product.icon}
                 <CardTitle className="font-headline text-xl">{product.name}</CardTitle>
@@ -213,12 +252,13 @@ function AboutSection() {
           </div>
           <div className="order-1 md:order-2">
             <Image
-              src="https://www.genuinehospi.com/images/gallery/new-corridor.jpeg"
+              src="/images/modular-ot1 (1).jpeg"
               alt="Hospital interior"
               width={800}
               height={600}
               className="rounded-lg shadow-xl"
               data-ai-hint="hospital interior"
+              priority
             />
           </div>
         </div>
@@ -244,7 +284,7 @@ function GallerySection() {
                 <div className="p-1">
                   <Card className="overflow-hidden">
                     <CardContent className="flex aspect-video items-center justify-center p-0">
-                       <Image src={image.src} alt={image.alt} width={800} height={600} className="w-full h-full object-cover" data-ai-hint={image.aiHint} />
+                       <Image src={image.src} alt={image.alt} width={800} height={600} className="w-full h-full object-cover" data-ai-hint={image.aiHint} loading={index === 0 ? 'eager' : 'lazy'} />
                     </CardContent>
                   </Card>
                 </div>
